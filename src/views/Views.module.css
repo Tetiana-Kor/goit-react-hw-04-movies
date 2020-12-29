@@ -1,0 +1,48 @@
+.movies {
+  display: flex;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+}
+
+.about {
+  margin-left: 20px;
+}
+
+.overview {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.descr {
+  font-size: 16px;
+  font-weight: 400;
+  display: block;
+  margin-top: 15px;
+}
+
+.genres {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.genresName {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 18px;
+}
+
+.activeLink {
+  composes: link;
+  color: #2196f3;
+}
