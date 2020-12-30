@@ -74,7 +74,10 @@ export default function HomeSubView() {
 
           <nav className={styles.navigation}>
             <NavLink
-              to={`${url}/cast`}
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: { location } },
+              }}
               className={styles.link}
               activeClassName={styles.activeLink}
             >
@@ -82,7 +85,10 @@ export default function HomeSubView() {
             </NavLink>
 
             <NavLink
-              to={`${url}/reviews`}
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: { location } },
+              }}
               className={styles.link}
               activeClassName={styles.activeLink}
             >
