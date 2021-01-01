@@ -5,8 +5,10 @@ import {
   NavLink,
   useRouteMatch,
 } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import SearchBar from '../components/SearchBar';
 import * as themoviedbAPI from '../service/themoviedb-api';
+import styles from './Views.module.css';
 
 export default function MoviesView() {
   const history = useHistory();
@@ -39,16 +41,23 @@ export default function MoviesView() {
       <SearchBar onSubmit={onChangeSearchQuery} />
 
       {movies && (
-        <ul>
+        <ul className={styles.trendItem}>
           {movies.map(movie => (
-            <li key={movie.id}>
+            <li key={movie.id} className={styles.trendMovie}>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                alt={movie.title}
+                width="320"
+                className={styles.imageTrend}
+              />
               <NavLink
                 to={{
                   pathname: `${url}/${movie.id}`,
                   state: { from: { location } },
                 }}
+                className={styles.trendLink}
               >
-                {movie.title}
+                <p className={styles.title}>{movie.title}</p>
               </NavLink>
             </li>
           ))}

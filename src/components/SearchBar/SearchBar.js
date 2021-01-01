@@ -10,17 +10,19 @@ export default function SearchBar({ onSubmit }) {
 
   const handleSubmit = event => {
     event.preventDefault();
+    console.log(name);
 
     if (name.trim() === '') {
       toast.error('Please enter something!');
       return;
     }
+
     onSubmit(name);
     setName('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
       <input type="text" value={name} onChange={handleChange} />
       <button type="submit">Search</button>
     </form>

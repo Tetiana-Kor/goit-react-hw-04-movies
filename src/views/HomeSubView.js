@@ -8,6 +8,7 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import * as themoviedbAPI from '../service/themoviedb-api';
 import styles from './Views.module.css';
 
@@ -44,17 +45,18 @@ export default function HomeSubView() {
     <>
       {movie && (
         <>
-          <button type="button" onClick={onGoBack}>
+          <button type="button" className={styles.button} onClick={onGoBack}>
             ⬅ Go back
           </button>
           <div className={styles.movies}>
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
-              width="300"
+              width="250"
             />
             <div className={styles.about}>
               <h1>{movie.title}</h1>
+              <p>User Score: {movie.vote_average * 10}%</p>
               <p className={styles.overview}>
                 Overview
                 <span className={styles.descr}>{movie.overview}</span>
@@ -73,6 +75,8 @@ export default function HomeSubView() {
           </div>
 
           <nav className={styles.navigation}>
+            <p className={styles.information}>Additional information</p>
+
             <NavLink
               to={{
                 pathname: `${url}/cast`,
@@ -96,7 +100,18 @@ export default function HomeSubView() {
             </NavLink>
           </nav>
 
-          <Suspense fallback={<p>Loading</p>}>
+          <Suspense
+            fallback={
+              <Loader
+                type="Circles"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={3000} //3 secs
+                className={styles.loader}
+              />
+            }
+          >
             <Switch>
               <Route path={`${path}:moviesId/cast`}>
                 <CastView moviesId={moviesId} />

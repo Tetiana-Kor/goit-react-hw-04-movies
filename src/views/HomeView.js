@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import * as themoviedbAPI from '../service/themoviedb-api';
+import styles from './Views.module.css';
 
 export default function HomeView() {
   const { url } = useRouteMatch();
@@ -21,17 +22,24 @@ export default function HomeView() {
     <>
       {movies && (
         <>
-          <h1>Trending today</h1>
-          <ul>
+          <h1 className={styles.trendToday}>Trending today</h1>
+          <ul className={styles.trendItem}>
             {movies.map(movie => (
-              <li key={movie.id}>
+              <li key={movie.id} className={styles.trendMovie}>
                 <Link
                   to={{
                     pathname: `${url}movies/${movie.id}`,
                     state: { from: { location } },
                   }}
+                  className={styles.trendLink}
                 >
-                  {movie.title}
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    width="320"
+                    className={styles.imageTrend}
+                  />
+                  <p className={styles.title}>{movie.title}</p>
                 </Link>
               </li>
             ))}

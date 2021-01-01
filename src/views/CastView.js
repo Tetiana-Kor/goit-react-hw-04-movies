@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as themoviedbAPI from '../service/themoviedb-api';
 import noPhoto from '../components/nophoto.jpg';
+import styles from './Views.module.css';
 
 export default function CastView({ moviesId }) {
   const [cast, setCast] = useState(null);
@@ -10,6 +11,7 @@ export default function CastView({ moviesId }) {
       if (data.cast.length === 0) {
         throw new Error('Is not avaliable');
       }
+      console.log(data.cast);
       setCast(data.cast);
     });
   }, [moviesId]);
@@ -17,9 +19,9 @@ export default function CastView({ moviesId }) {
   return (
     <div>
       {cast && (
-        <ul>
+        <ul className={styles.cast}>
           {cast.map(item => (
-            <li key={item.id}>
+            <li key={item.id} className={styles.castItem}>
               <img
                 src={
                   item.profile_path
@@ -27,10 +29,15 @@ export default function CastView({ moviesId }) {
                     : noPhoto
                 }
                 alt={item.name}
-                width="150"
+                width="100"
+                height="150"
+                className={styles.castImg}
               />
               <p>{item.name}</p>
-              <p>Character: {item.character}</p>
+              <p className={styles.character}>
+                Character: <br />
+                {item.character}
+              </p>
             </li>
           ))}
         </ul>
