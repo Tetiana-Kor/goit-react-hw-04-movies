@@ -11,7 +11,6 @@ export default function CastView({ moviesId }) {
       if (data.cast.length === 0) {
         throw new Error('Is not avaliable');
       }
-      console.log(data.cast);
       setCast(data.cast);
     });
   }, [moviesId]);

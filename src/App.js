@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
-import styles from './App.css';
 import Container from './components/Container';
 
 const AppBar = lazy(() =>
@@ -30,14 +30,15 @@ function App() {
     <Container>
       <Suspense
         fallback={
-          <Loader
-            type="Circles"
-            color="#00BFFF"
-            height={100}
-            width={100}
-            timeout={3000} //3 secs
-            className={styles.loader}
-          />
+          <div style={{ textAlign: 'center', marginTop: '80px' }}>
+            <Loader
+              type="Circles"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={3000} //3 secs
+            />
+          </div>
         }
       >
         <AppBar />

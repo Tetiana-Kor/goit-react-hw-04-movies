@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import styles from './SearchBar.module.css';
 
 export default function SearchBar({ onSubmit }) {
   const [name, setName] = useState('');
@@ -10,7 +11,6 @@ export default function SearchBar({ onSubmit }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(name);
 
     if (name.trim() === '') {
       toast.error('Please enter something!');
@@ -22,9 +22,16 @@ export default function SearchBar({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
-      <input type="text" value={name} onChange={handleChange} />
-      <button type="submit">Search</button>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+        type="text"
+        value={name}
+        onChange={handleChange}
+        className={styles.input}
+      />
+      <button type="submit" className={styles.button}>
+        Search
+      </button>
     </form>
   );
 }

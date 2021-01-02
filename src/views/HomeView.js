@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import * as themoviedbAPI from '../service/themoviedb-api';
 import styles from './Views.module.css';
+import noImageAv from '../components/noImageAvailable.jpg';
 
 export default function HomeView() {
   const { url } = useRouteMatch();
@@ -34,9 +35,13 @@ export default function HomeView() {
                   className={styles.trendLink}
                 >
                   <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                        : noImageAv
+                    }
                     alt={movie.title}
-                    width="320"
+                    // width="320"
                     className={styles.imageTrend}
                   />
                   <p className={styles.title}>{movie.title}</p>

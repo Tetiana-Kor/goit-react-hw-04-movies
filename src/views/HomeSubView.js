@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import * as themoviedbAPI from '../service/themoviedb-api';
+import noImageAv from '../components/noImageAvailable.jpg';
 import styles from './Views.module.css';
 
 const CastView = lazy(() =>
@@ -50,7 +51,11 @@ export default function HomeSubView() {
           </button>
           <div className={styles.movies}>
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : noImageAv
+              }
               alt={movie.title}
               width="250"
             />

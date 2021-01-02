@@ -8,6 +8,7 @@ import {
 import { toast } from 'react-toastify';
 import SearchBar from '../components/SearchBar';
 import * as themoviedbAPI from '../service/themoviedb-api';
+import noImageAv from '../components/noImageAvailable.jpg';
 import styles from './Views.module.css';
 
 export default function MoviesView() {
@@ -24,13 +25,17 @@ export default function MoviesView() {
   };
 
   useEffect(() => {
-    if (searchQuery === '') {
+    if (!searchQuery) {
       return;
     }
 
     themoviedbAPI
       .getSearchMovie(searchQuery)
       .then(data => {
+        if (data.results.length === 0) {
+          toast.error('Invalid request!');
+          return;
+        }
         setMovies(data.results);
       })
       .catch(error => setError(error));
@@ -45,7 +50,11 @@ export default function MoviesView() {
           {movies.map(movie => (
             <li key={movie.id} className={styles.trendMovie}>
               <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                    : noImageAv
+                }
                 alt={movie.title}
                 width="320"
                 className={styles.imageTrend}
